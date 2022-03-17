@@ -9,13 +9,6 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-parser = argparse.ArgumentParser(
-    description='BioX Demonstrator'
-)
-parser.add_argument("-i", "--festo_connect_ip", help="ip address for festo connect", type=str)
-parser.add_argument("-p", "--port", help="Port used for OPCUA connection (Standard port: 4840)", type=int)
-args = parser.parse_args()
-
 class simpleConnect():
     def __init__(self):
         pass
@@ -86,4 +79,5 @@ class simpleConnect():
         logger.info("Client has been disconnected!")
 
 if __name__ == "__main__":
-    simpleConnect(args.festo_connect_ip)
+    #simpleConnect(args.festo_connect_ip)
+    print("Do not run from the module!")
