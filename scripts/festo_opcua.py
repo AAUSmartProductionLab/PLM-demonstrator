@@ -77,7 +77,17 @@ class simpleConnect():
     def disconnect(self):
         self.client.disconnect()
         logger.info("Client has been disconnected!")
+        
+    def getProdID(self, ip, port=4840):
+        simpleConnect.connect(self, ip, port)
+        id = self.client.get_node('ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stRfidData.stMesData.udiPNo').get_value()
+        simpleConnect.disconnect(self)
+        return id
 
 if __name__ == "__main__":
     #simpleConnect(args.festo_connect_ip)
     print("Do not run from the module!")
+
+    
+
+        
