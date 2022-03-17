@@ -1,7 +1,6 @@
 ########################### IMPORTED MODULES AND MESSAGES ###########################################
 from socket import AF_INET, socket
 
-from numpy import product
 from mir import MiR as mir
 from festo_opcua import simpleConnect as festo
 from dataclasses import dataclass
@@ -30,7 +29,6 @@ PNo = {'6001':['warehouse_blue', 'blue_sort.urp'], '6002':['warehouse_black', 'b
 # trigger used when the robot has to move to the initial position for sorting.
 INIT_TRIGGER = True
 
-print('load ' + PNo[str(6002)][1])
 ########################## CLASSES AND FUNCTION DEFINITIONS #########################################
 def connect_UR():
     ur_socket = socket.socket(AF_INET, socket.SOCK_STREAM)
@@ -73,6 +71,7 @@ def main():
     response = send_cmd('programState')
     while response == 'PLAYING':
         print("{0} is running!".format(current_PNo))
+        response = send_cmd('programState')
     print("{0} finsihed!".format(current_PNo))
     
     
