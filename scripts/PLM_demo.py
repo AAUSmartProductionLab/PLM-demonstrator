@@ -24,9 +24,10 @@ INIT_MISSION = 'initial_mission' # mission ID for traveling to the initial sorti
 # Position IDs for the MIR robot
 SORTING_POSE = 'sorting_pose'
 
-PNo = {'6001':['warehouse_blue', 'blue_sort.urp'], '6002':['warehouse_black', 'black_sort.urp'], '6003':['warehouse_white', 'white_sort.urp'],
-       '6004':['warehouse_bottom','bottom_sort.urp'], '6005':['warehouse_1fuse', '1fuse_sort.urp'], '6006':['warehouse_2fuse', '2fuse_sort.urp']}
-
+PNo = {'6002':['warehouse_blue', 'blue_sort.urp'], '6000':['warehouse_black', 'black_sort.urp'], '6001':['warehouse_white', 'white_sort.urp'],
+       '10':['warehouse_bottom','bottom_sort.urp'], '1212':['warehouse_1fuse', '1fuse_sort.urp'], '1214':['warehouse_2fuse', '2fuse_sort.urp']}
+# code references: 6000 - Black Phone, 6001 - Black Phone, White Lid, 6002 - Black Phone, Blue Lid, 10 - Black Bottom, 
+# 1212 - Product Fuse Left, 1214 - Product Both Fuses
 # trigger used when the robot has to move to the initial position for sorting.
 INIT_TRIGGER = True
 
