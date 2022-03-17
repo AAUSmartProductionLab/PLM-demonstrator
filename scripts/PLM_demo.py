@@ -52,16 +52,18 @@ def send_cmd(cmd):
 ####################################### MAIN LOOP ###################################################
 def main():
     festo_cls = festo()
+    mir_cls = mir()
+    INIT_TRIGGER = True
     while(True):
         if festo_cls.checkPallet(PACKING_IP) == False: return
         
         if INIT_TRIGGER == True:
             INIT_TRIGGER = False
-            init_mission_id = mir.create_mission(INIT_MISSION)
-            result, position_id = mir.create_action(init_mission_id, SORTING_POSE, action_type='move')
-            mir.put_state_to_execute()
+            init_mission_id = mir_cls.create_mission(INIT_MISSION)
+            result, position_id = mir_cls.create_action(init_mission_id, SORTING_POSE, action_type='move')
+            mir_cls.put_state_to_execute()
             
-            while mir.get_mission_done_or_not(init_mission_id) == False: # if the postion is reached break the loop
+            while mir_cls.get_mission_done_or_not(init_mission_id) == False: # if the postion is reached break the loop
                 print("moving into position!") 
                     
             print("The init mission is done! Sorting will start shortly!")
