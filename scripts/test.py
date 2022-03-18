@@ -13,18 +13,19 @@ def connect_UR():
 
     return ur_socket
 
-def send_cmd(cmd):
-    ur_socket = connect_UR()
+def send_cmd(ur_socket, cmd):    
     cmd = cmd + '\n'
     received=ur_socket.send(cmd.encode())
-    #received = ur_socket.recv(1024)
-    
-    
+    received = ur_socket.recvfrom(4096)
+
     return received
 
 def main():
+    ur_socket = connect_UR()
+    send_cmd(ur_socket, 'load test_socket.urp')
+    send_cmd(ur_socket, 'stop')
     while(True):
-        result = send_cmd('isProgramSaved')
+        result = send_cmd(ur_socket, 'programState')
         print(result)
         time.sleep(1)
 

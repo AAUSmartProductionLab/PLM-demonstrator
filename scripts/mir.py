@@ -1,3 +1,4 @@
+from urllib import response
 import requests, json
 from geopy.distance import geodesic
 import math
@@ -11,10 +12,9 @@ class MiR():
         self.headers = {}
         self.headers['Content-Type'] = 'application/json'
         self.headers['Accept-Language'] = 'en_US'
-        self.headers[
-            'Authorization'] = 'Basic YWRtaW46OGM2OTc2ZTViNTQxMDQxNWJkZTkwOGJkNGRlZTE1ZGZiMTY3YTljODczZmM0YmI4YTgxZjZmMmFiNDQ4YTkxOA=='
+        self.headers['Authorization'] = 'Basic YWRtaW46OGM2OTc2ZTViNTQxMDQxNWJkZTkwOGJkNGRlZTE1ZGZiMTY3YTljODczZmM0YmI4YTgxZjZmMmFiNDQ4YTkxOA=='
         self.group_id = 'mirconst-guid-0000-0011-missiongroup'
-        self.session_id = 'a2f5b1e6-d558-11ea-a95c-0001299f04e5'
+        self.session_id = '85cd7f3f-f2b7-11ea-ad20-0001299f16e3' #'a2f5b1e6-d558-11ea-a95c-0001299f04e5'
 
     # get the system information
     def get_system_info(self):
@@ -90,6 +90,7 @@ class MiR():
     def post_mission(self, name):
         parameters = {"name": name, "hidden": False, "group_id": self.group_id, 'session_id': self.session_id}
         post_mission = requests.post(self.host + 'missions', json=parameters, headers=self.headers)
+        print(post_mission)
 
         return post_mission.json()
 
@@ -219,6 +220,7 @@ class MiR():
     # create a mission with a certain name and return it's guid
     def create_mission(self, name):
         result = self.post_mission(name)
+        print(result)
         mission_id = result['guid']
 
         return mission_id
@@ -348,4 +350,16 @@ class MiR():
         data = {"mission_id": GUID}
         response = requests.post(self.host + "mission_queue", headers=self.headers, json=data)
 
+        return response.json()
+
+    # Delete the mission queue
+    def delete_mission_queue(self):
+        response = requests.delete(self.host + "mission_queue", headers=self.headers)
+
+        return response.json()
+        
+    # Delete a specific mission based upon mission_id
+    def delete_specific_mission(self, guid):
+        response = requests.delete(self.host + "mission_queue/" + guid, headers=self.headers)
+        
         return response.json()
