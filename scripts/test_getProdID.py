@@ -4,8 +4,8 @@ from festo_opcua import simpleConnect
 IP = '172.20.1.1'
 
 def main():
-    dickhead = simpleConnect()
-    PNo = dickhead.getProdID(IP)
+    festo_connect = simpleConnect()
+    PNo = festo_connect.getProdID(IP)
     print(PNo)
 
 if __name__ == "__main__":

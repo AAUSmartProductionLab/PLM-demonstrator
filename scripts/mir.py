@@ -323,9 +323,20 @@ class MiR():
     # Check if a mission is done or not
     def get_mission_done_or_not(self, id):
         exe_mission = self.get_mission_queue()
+        
         for item in exe_mission:
+            print(item)
+            if (item['id'] == id):
+                print(item['state'])
             if (item['id'] == id) and (item['state'] == 'Done'):
                 return True
+
+        return False
+
+    def get_mission_latest_mission_status(self):
+        exe_mission = self.get_mission_queue()
+        if exe_mission[-1]['state'] == 'Done':
+            return True
 
         return False
 
@@ -354,9 +365,7 @@ class MiR():
 
     # Delete the mission queue
     def delete_mission_queue(self):
-        response = requests.delete(self.host + "mission_queue", headers=self.headers)
-
-        return response.json()
+        response = requests.delete(self.host + "mission_queue/", headers=self.headers)
         
     # Delete a specific mission based upon mission_id
     def delete_specific_mission(self, guid):

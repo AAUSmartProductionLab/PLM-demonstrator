@@ -1,10 +1,9 @@
 import socket
 import time
 
-
 # IP-addr/ports for UR
-UR_IP = '192.168.12.40' # might need to be changed
-UR_PORT = 29999
+UR_IP = '192.168.0.102'
+UR_PORT = 30001
 
 def connect_UR():
     ur_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,12 +21,8 @@ def send_cmd(ur_socket, cmd):
 
 def main():
     ur_socket = connect_UR()
-    send_cmd(ur_socket, 'load test_socket.urp')
-    send_cmd(ur_socket, 'stop')
-    while(True):
-        result = send_cmd(ur_socket, 'programState')
-        print(result)
-        time.sleep(1)
+    result = send_cmd(ur_socket, "set_tool_digital_out(0, True)")
+    time.sleep(1)
 
 if __name__ == "__main__":
     main()
